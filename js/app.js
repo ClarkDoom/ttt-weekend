@@ -2,7 +2,7 @@
 //*Step 1 - Define the required variables used to track the state of the game
 
 ////   1a) Use a variable named `board` to represent the state of the squares on
-/////       the board.
+////       the board.
 
 ////   1b) Use a variable named `turn` to track whose turn it is.
 
@@ -14,7 +14,7 @@
 //// Step 2 - Store cached element references.
 
   //// 2a) In a constant called `squareEls`, store the nine elements 
-  ////    representing the squares on the page.
+  //    representing the squares on the page.
 
   //// 2b) In a constant called `messageEl`, store the element that displays the 
   ////    game's status on the page.
@@ -75,24 +75,23 @@
 // Step 6 - Handle a player clicking a square with a `handleClick` function
 
   //// 6a) Create a function called `handleClick`. It will have an `evt`
-  ////     parameter.
+  ////    parameter.
 
-  //// 6b) Attach an event listener to the game board (you can do this to each
-  ////     one of the existing `squareEls` with a `forEach` loop OR add a new
-  ////     cached element reference that will allow you to take advantage of 
-  ////     event bubbling). On the `'click'` event, it should call the 
+  ////    6b) Attach an event listener to the game board (you can do this to each
+  ////    one of the existing `squareEls` with a `forEach` loop OR add a new
+  ////    cached element reference that will allow you to take advantage of 
   ////    `handleClick` function you created in 6a.
 
   //// 6c) Obtain the index of the square that was clicked by "extracting" the 
   ////     index from an `id` assigned to the target element in the HTML. Assign 
   ////     this to a constant called `sqIdx`.
 
-  //// 6d) If the `board` has a value at the `sqIdx`, immediately `return`  
-  ////     because that square is already taken. Also, if `winner` is not `null`
-  ////     immediately `return` because the game is over.
+  ///// 6d) If the `board` has a value at the `sqIdx`, immediately `return`  
+  /////     because that square is already taken. Also, if `winner` is not `null`
+  /////     immediately `return` because the game is over.
 
 
-// Step 6.1 - `placePiece`
+//// Step 6.1 - `placePiece`
 
   //// 6.1a) Create a function named placePiece that accepts an `idx` parameter.
 
@@ -100,7 +99,7 @@
   ////       current value of `turn`.
 
 
-// 6.2 - `checkForTie`
+//// 6.2 - `checkForTie`
 
   //// 6.2a) Create a function named `checkForTie`.
 
@@ -110,7 +109,7 @@
 
 // 6.3 - `checkForWinner`
 
-  // 6.3a) Create a function called `checkForWinner`
+  //// 6.3a) Create a function called `checkForWinner`
 
   // 6.3b) Determine if a player has won using one of the two options below.
   //       Option 1 is a more elegant method that takes advantage of the 
@@ -120,12 +119,12 @@
   //       but using it as a reference will help you build a solution.
   //       Ensure you choose only one path.
 
-  //       Option 1) Loop through each of the winning combination arrays 
-  //       defined in the `winningCombos` array. Total up the three board 
-  //       positions using the three indexes in the current combo. Convert 
-  //       the total to an absolute value (convert any negative total to 
-  //       positive). If the total equals 3, we have a winner, and can set 
-  //       `winner` to true.
+  //*       * Option 1) Loop through each of the winning combination arrays 
+  //*       defined in the `winningCombos` array. Total up the three board 
+  // *      positions using the three indexes in the current combo. Convert 
+  // *      the total to an absolute value (convert any negative total to 
+  //*       positive). If the total equals 3, we have a winner, and can set 
+  //*       `winner` to true.
 
   //       Option 2) For each one of the winning combinations you wrote in 
   //       step 5, find the total of each winning combination. Convert the 
@@ -167,16 +166,16 @@
 
 /*-------------------------------- Constants --------------------------------*/
 
-// NOT SURE IF I SHOULD USE 0'S OR NULL'S
+
 const winningCombos = [
-  [1,1,1,0,0,0,0,0,0],
-  [0,0,0,1,1,1,0,0,0],
-  [0,0,0,0,0,0,1,1,1],
-  [1,0,0,1,0,0,1,0,0],
-  [0,1,0,0,1,0,0,1,0],
-  [0,0,1,0,0,1,0,0,1],
-  [1,0,0,0,1,0,0,0,1],
-  [0,0,1,0,1,0,1,0,0],
+  [0, 1, 2],
+  [3, 4, 5],
+  [6, 7, 8],
+  [0, 3,6 ],
+  [1,4,7],
+  [2,5,8,],
+  [2,4,6],
+  [0,4,8]
 ]
 
 
@@ -190,20 +189,21 @@ let board, turn, winner, tie
 const squareEls = document.getElementsByClassName('sqr')
 const messageEl = document.getElementById('message')
 const gameBoard = document.querySelector('.board')
+const resetBtn = document.querySelector("#reset")
 
 /*----------------------------- Event Listeners -----------------------------*/
 
 gameBoard.addEventListener('click', handleClick)
+resetBtn.addEventListener('click', init)
+
 
 
 /*-------------------------------- Functions --------------------------------*/
 
 function init(){
-  // 1 will represent player X, -1 will represent player O
   turn = 1
   winner = false
   tie = false
-  //set the board variable to an array containing nin nulls to represent the empty squares
   board = []
   for(let i = 0; i < 9; i++){
     board[i] = null
@@ -220,17 +220,12 @@ function render(){
 
 function updateBoard(){
   for(let i = 0; i < 9; i++){
-    if(board[i] === null){
-      // this used to set to 'a' instead of null
-      board[i] = null
-      squareEls[i].textContent = board[i]
-    } else if (board[i] === 1){
-      board[i] = "b"
-      squareEls[i].textContent = board[i]
-      // i put the negative in parenthesis, CONFIRM IF THIS IS NEEDED 
-    } else if(board[i] === (-1)){
-      board[i] = "c"
-      squareEls[i].textContent = board[i]
+    if(board[i] === null){ 
+      squareEls[i].innerHTML = null
+    } else if (board[i] === 1){ 
+      squareEls[i].textContent = "X" 
+    } else if(board[i] === -1){ 
+      squareEls[i].textContent = "0"
     }
   }
   console.log('updateBoard function has ran')
@@ -244,20 +239,22 @@ function updateMessage(){
   } else {
     messageEl.textContent = "Player X has won!"
   }
-  console.log('updatedMessage function has ran')
+  console.log("updateMessage has ran")
 }
 
 function handleClick(evt){
-  console.log('clicking works', evt.target)
   const sqIdx = evt.target.id.slice(2)
-  console.log(sqIdx)
-  for(let i = 0; i < 9; i++){
-    if(board[i] !== null){
-      return
-    } else if (winner !== null){
-      return
-    }
+  console.log('handleClick ran - you clicked on Idx: ' + sqIdx)
+  if(board[sqIdx] !== null){
+    return
+  } else if (winner === true){
+    return
   }
+  placePiece(sqIdx)
+  checkForTie()
+  checkForWinner()
+  switchPlayerTurn()
+  render()
   console.log('handleClick function has ran')
 }
 
@@ -277,9 +274,36 @@ function checkForTie(){
   console.log('checkForTie function has ran')
 }
 
+
+// need to involve board
 function checkForWinner(){
+  for(let i = 0; i < winningCombos.length; i++){ 
+    if(Math.abs(
+// [0, 1, 2]
+      board[winningCombos[i][0]]+
+      board[winningCombos[i][1]]+
+      board[winningCombos[i][2]]
+      ) 
+      === 3) {
+        winner = true
+    } else {
+        winner = false
+    }
+  }
   console.log('checkForWinner function has ran')
 }
 
+function switchPlayerTurn(){
+  if(winner === true){
+    return
+  } else if(winner === false){
+    turn = turn * -1
+  }
+  console.log("switchPlayerTurn function has ran")
+}
+
+
 /*-------------------------------- Program Flow --------------------------------*/
 init()
+
+
