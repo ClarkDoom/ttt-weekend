@@ -45,9 +45,9 @@ function updateBoard(){
     if(board[i] === null){ 
       squareEls[i].innerHTML = null
     } else if (board[i] === 1){ 
-      squareEls[i].textContent = "❎" 
+      squareEls[i].textContent = "X" 
     } else if(board[i] === -1){ 
-      squareEls[i].textContent = "🟢"
+      squareEls[i].textContent = "O"
     }
   }
 }
