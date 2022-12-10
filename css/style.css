@@ -1,12 +1,17 @@
+@import url('https://fonts.googleapis.com/css2?family=Martian+Mono:wght@500&display=swap');
+
 body {
-    background-color: gray;
+    background-color: black;
 	/* Use a system font, if none are available use an available sans-sarif   font */
-	font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI",
-		Roboto, Oxygen-Sans, Ubuntu, Cantarell, "Helvetica Neue", sans-serif;
+	/* font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI",
+		Roboto, Oxygen-Sans, Ubuntu, Cantarell, "Helvetica Neue", sans-serif; */
+  font-family: Martian Mono;
 	margin: 0;
   height: 100vh;
   display: flex;
   flex-direction: column;
+  text-align: center;
+  color: limegreen
 }
 
 section.board {
@@ -14,6 +19,12 @@ section.board {
   grid-template-rows: repeat(3, 10vmin);
   grid-template-columns: repeat(3, 10vmin);
   grid-gap: 0vmin;
+  text-align: center;
+  margin-left: auto;
+  margin: auto;
+  background-color: limegreen;
+  color: black;
+  text-align: center;
 }
 
 div {
@@ -21,4 +32,13 @@ div {
   font-size: 8vmin;
   text-align: center;
   vertical-align: middle;
+}
+
+button {
+  background-color: limegreen;
+  font-family: Martian Mono;
+}
+
+button:hover {
+  text-decoration: underline;
 }

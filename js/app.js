@@ -64,8 +64,10 @@ function updateMessage(){
   } else {
     if(turn === 1){
       messageEl.textContent = "Player X has won!"
+			confetti.start(1500)
     } else {
       messageEl.textContent = "Player O has won!"
+			confetti.start(1500)
     }
   }
 }
@@ -91,7 +93,7 @@ function placePiece(idx){
 function checkForTie(){
   for(let i = 0; i < 9; i++){
     if (board[i] === null){
-      tie = false
+      return tie = false
     } else {
       tie = true
     }
