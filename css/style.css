@@ -25,6 +25,7 @@ section.board {
   background-color: limegreen;
   color: black;
   text-align: center;
+
 }
 
 div {
@@ -42,3 +43,4 @@ button {
 button:hover {
   text-decoration: underline;
 }
+
