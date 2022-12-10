@@ -53,15 +53,15 @@
   ////       `null`). To keep it simple, start with just putting a letter in 
   ////       each square depending on what the the value of each cell is.
 
-  //// 4d) Create a function called `updateMessage`
+  // 4d) Create a function called `updateMessage`
   
-  //// 4e) In the `updateMessage` function, render a message based on the 
-  ////     current game state:
-  ////     - If both `winner` and `tie` have a value of false (meaning the game 
-  ////       is still in progress), render whose turn it is.
-  ////     - If `winner` is false, but `tie` is true, render a tie message.
-  ////     - Otherwise, render a congratulatory message to the player that has 
-  ////       won.
+  // 4e) In the `updateMessage` function, render a message based on the 
+  //     current game state:
+  //     - If both `winner` and `tie` have a value of false (meaning the game 
+  //       is still in progress), render whose turn it is.
+  //     - If `winner` is false, but `tie` is true, render a tie message.
+  //     - Otherwise, render a congratulatory message to the player that has 
+  //       won.
 
   //// 4f) Invoke both the `updateBoard` and the `updateMessage` functions
   ////     inside of your `render` function.
@@ -120,9 +120,9 @@
   //       Ensure you choose only one path.
 
   //*       * Option 1) Loop through each of the winning combination arrays 
-  //*       defined in the `winningCombos` array. Total up the three board 
-  // *      positions using the three indexes in the current combo. Convert 
-  // *      the total to an absolute value (convert any negative total to 
+  //*       defined in the `winningCombos` array. 
+  //*       Total up the three board positions using the three indexes in the current combo. 
+  //*       Convert the total to an absolute value (convert any negative total to 
   //*       positive). If the total equals 3, we have a winner, and can set 
   //*       `winner` to true.
 
@@ -178,8 +178,6 @@ const winningCombos = [
   [0,4,8]
 ]
 
-
-
 /*---------------------------- Variables (state) ----------------------------*/
 
 let board, turn, winner, tie
@@ -215,7 +213,7 @@ function init(){
 function render(){
   updateBoard()
   updateMessage()
-  console.log('render function has ran')
+  //console.log('render function has ran')
 }
 
 function updateBoard(){
@@ -228,18 +226,27 @@ function updateBoard(){
       squareEls[i].textContent = "0"
     }
   }
-  console.log('updateBoard function has ran')
+  //console.log('updateBoard function has ran')
 }
 
+
 function updateMessage(){
-  if(winner === false && tie === false){
-    messageEl.textContent = "It is the next player's turn"
-  } else if(winner === false && tie === true){
+  if(!winner && !tie){
+    if(turn === 1){
+      messageEl.textContent = "It is X's turn"
+    } else {
+      messageEl.textContent = "It is O's turn"
+    }
+  } else if(!winner && tie){
     messageEl.textContent = "The match was a tie"
   } else {
-    messageEl.textContent = "Player X has won!"
+    if(turn === 1){
+      messageEl.textContent = "Player X has won!"
+    } else {
+      messageEl.textContent = "Player O has won!"
+    }
   }
-  console.log("updateMessage has ran")
+  //console.log("updateMessage has ran")
 }
 
 function handleClick(evt){
@@ -255,12 +262,12 @@ function handleClick(evt){
   checkForWinner()
   switchPlayerTurn()
   render()
-  console.log('handleClick function has ran')
+  //console.log('handleClick function has ran')
 }
 
 function placePiece(idx){
   board[idx] = turn
-  console.log('placePiece function has ran')
+  //console.log('placePiece function has ran')
 }
 
 function checkForTie(){
@@ -271,26 +278,24 @@ function checkForTie(){
       tie = true
     }
   }
-  console.log('checkForTie function has ran')
+  //console.log('checkForTie function has ran')
 }
 
-
-// need to involve board
 function checkForWinner(){
+  console.log('checkForWinner function has ran')
   for(let i = 0; i < winningCombos.length; i++){ 
     if(Math.abs(
-// [0, 1, 2]
+      // winning combo - first iteration[0, 1, 2]
+      //
       board[winningCombos[i][0]]+
       board[winningCombos[i][1]]+
       board[winningCombos[i][2]]
       ) 
       === 3) {
-        winner = true
-    } else {
-        winner = false
+        console.log('iterating through winning combos')
+        return winner = true
     }
   }
-  console.log('checkForWinner function has ran')
 }
 
 function switchPlayerTurn(){
@@ -299,7 +304,7 @@ function switchPlayerTurn(){
   } else if(winner === false){
     turn = turn * -1
   }
-  console.log("switchPlayerTurn function has ran")
+  //console.log("switchPlayerTurn function has ran")
 }
 
 
